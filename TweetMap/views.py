@@ -124,7 +124,7 @@ def init(request):
     for vol in (val for item, val in trends[0].iteritems() if item == 'trends'):
         trending_topic_indx = sorted(range(len(vol)), key=lambda k: vol[k]['tweet_volume'])[::-10]
         for i, _ in enumerate(trending_topic_indx):
-            if vol[i]['tweet_volume'] is not None
+            if vol[i]['tweet_volume'] is not None:
                 trending_topic_names.append(vol[i]['name'])
         # trending_topic_names = [vol[i]['name'] for i in trending_topic_indx]
 
