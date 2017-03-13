@@ -150,11 +150,9 @@
                     "beforeSend": function(xhr, settings) {
                                     console.log("Before Send");
                                     $.ajaxSettings.beforeSend(xhr, settings);
-{#                                    var loading = document.getElementById('loader')#}
                     },
 					success: function(result) {
 					    counter = 0;
-					    $(".content").html(html);
                         $('#loadingmessage').hide();
 						tweetmsgs = result.tweets;
 						console.log(tweetmsgs);
