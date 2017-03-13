@@ -60,6 +60,18 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
+    .center
+    {
+        z-index: 1000;
+        margin: 300px auto;
+        padding: 10px;
+        width: 130px;
+        background-color: White;
+        border-radius: 10px;
+        filter: alpha(opacity=100);
+        opacity: 1;
+        -moz-opacity: 1;
+    }
     </style>
 	<body>
 
@@ -79,8 +91,10 @@
         </form>
 
         <div id="map"></div>
-        <div id='loadingmessage' style='display:none'>
-          <img src='./include/ajax-loader.gif'/>
+        <div id='modal' style='display:none'>
+            <div class="center">
+                <img src='./include/ajax-loader.gif'/>
+            </div>
         </div>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
@@ -133,14 +147,14 @@
                 global: false,
                 type: "GET",
                 beforeSend: function(xhr, settings) {
-                    $(".loadingimage").show();
+                    $(".modal").show();
                     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
                         // Only send the token to relative URLs i.e. locally.
                         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
                     }
                 },
                 complete: function () {
-                $(".loadingimage").hide();
+                $(".modal").hide();
             }
             });
 
