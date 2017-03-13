@@ -72,6 +72,19 @@
         opacity: 1;
         -moz-opacity: 1;
     }
+    .loadingimage
+    {
+        position: fixed;
+        z-index: 999;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: Black;
+        filter: alpha(opacity=60);
+        opacity: 0.6;
+        -moz-opacity: 0.8;
+    }
     </style>
 	<body>
 
@@ -91,7 +104,7 @@
         </form>
 
         <div id="map"></div>
-        <div id='modal' style='display:none'>
+        <div id='loadingimage' style='display:none'>
             <div class="center">
                 <img src='./include/ajax-loader.gif'/>
             </div>
@@ -147,15 +160,15 @@
                 global: false,
                 type: "GET",
                 beforeSend: function(xhr, settings) {
-                    $(".modal").show();
+                    $(".loadingimage").show();
                     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
                         // Only send the token to relative URLs i.e. locally.
                         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
                     }
                 },
                 complete: function () {
-                $(".modal").hide();
-            }
+                    $(".loadingimage").hide();
+                }
             });
 
 			function eval() {
