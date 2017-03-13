@@ -47,6 +47,19 @@
         text-decoration: none;
         cursor: pointer;
     }
+    .loader {
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
     </style>
 	<body>
 
@@ -66,7 +79,9 @@
         </form>
 
         <div id="map"></div>
-
+        <div id='loadingmessage' style='display:none'>
+          <img src='./include/ajax-loader.gif'/>
+        </div>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
 		<script type="text/javascript">
@@ -126,6 +141,7 @@
 			function eval() {
 				var val = document.getElementById('yr').value;
 				alert(val);
+				$('#loadingmessage').show(),
 				$.ajax({
 					url : "/filter/",
 					method : "POST",
@@ -134,11 +150,12 @@
                     "beforeSend": function(xhr, settings) {
                                     console.log("Before Send");
                                     $.ajaxSettings.beforeSend(xhr, settings);
+{#                                    var loading = document.getElementById('loader')#}
                     },
 					success: function(result) {
-					    alert(result);
 					    counter = 0;
-						console.log(counter);
+					    $(".content").html(html);
+                        $('#loadingmessage').hide();
 						tweetmsgs = result.tweets;
 						console.log(tweetmsgs);
                         bounds = new google.maps.LatLngBounds();
