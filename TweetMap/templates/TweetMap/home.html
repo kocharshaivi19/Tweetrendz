@@ -130,18 +130,24 @@
 			}
 
             $.ajaxSetup({
+                global: false,
+                type: "GET",
                 beforeSend: function(xhr, settings) {
+                    $(".loadingimage").show();
                     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
                         // Only send the token to relative URLs i.e. locally.
                         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
                     }
-                }
+                },
+                complete: function () {
+                $(".loadingimage").hide();
+            }
             });
 
 			function eval() {
 				var val = document.getElementById('yr').value;
 				alert(val);
-				$('#loadingmessage').show();
+{#				$('#loadingmessage').show();#}
 				$.ajax({
 					url : "/filter/",
 					method : "POST",
@@ -153,7 +159,7 @@
                     },
 					success: function(result) {
 					    counter = 0;
-                        $('#loadingmessage').hide();
+{#                        $('#loadingmessage').hide();#}
 						tweetmsgs = result.tweets;
 						console.log(tweetmsgs);
                         bounds = new google.maps.LatLngBounds();
