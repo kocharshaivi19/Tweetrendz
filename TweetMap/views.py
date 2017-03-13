@@ -7,16 +7,8 @@ from elasticsearch import Elasticsearch, RequestsHttpConnection
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_protect
 import geocoder
-import requests
-from aws_requests_auth.aws_auth import AWSRequestsAuth
 
-es_host = "<Your-key>"
-
-auth = AWSRequestsAuth(aws_access_key="Your-key",
-                       aws_secret_access_key="Your-Key",
-                       aws_host=es_host,
-                       aws_region="us-west-2",
-                       aws_service="es")
+es_host = "search-shaivi-ebs-lqccffaldru35vh5fpkpywmzqq.us-west-2.es.amazonaws.com"
 
 es = Elasticsearch(host = es_host,
                     port = 443,
@@ -24,10 +16,10 @@ es = Elasticsearch(host = es_host,
                     verify_certs = True,
                     connection_class=RequestsHttpConnection)
 
-consumer_key = 'Your-Key'
-consumer_secret = 'You-Key'
-access_token = 'Your-Key'
-access_secret = 'Your-Key'
+consumer_key = '4lu0KBdbkhRhK0zg4HEk9k3Wp'
+consumer_secret = 'gowCnsCRUXidVmathcHVnml4c2B2QEuDu6XM5PXs8Tp1HEg7bz'
+access_token = '4621122272-vpdd9KBuj0TPUETmBPcLIEfDK7puogaD1T9G6lq'
+access_secret = '035CnvnwCdFoXNpMrpfslKGEZOfG7o3hurugofmKoTfMn'
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 authAPI = auth.set_access_token(access_token, access_secret)
