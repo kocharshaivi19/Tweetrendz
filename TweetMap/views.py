@@ -87,18 +87,18 @@ class listener(StreamListener):
 
 @csrf_protect
 def filter(request):
-    # print "yes"
+    print "yes"
     if request.method == "POST":
         try:
-            # print request.method
+            print request.method
             if 'input' in request.POST:
                 query = str(request.POST.get('input', ''))
                 # print query
                 try:
-                    l = listener(time_limit=60)
+                    l = listener(time_limit=30)
                     twitter_stream = Stream(auth, l)
                     twitter_stream.filter(track=[query])
-                    tweets = es.search(index='tweetindex', body={"from": 0, "size": 1000, "query": {"match": {"title":query}}})
+                    tweets = es.search(index='tweetindex',doc_type="Collections", body={"from": 0, "size": 1000, "query": {"match": {"title":query}}})
                     # print tweets.keys()
                     latlonginfo = []
                     for tweet in tweets['hits']['hits']:
@@ -108,7 +108,7 @@ def filter(request):
                         info['title'] = tweet['_source']['title']
                         latlonginfo.append(info)
                         print (info)
-                    # print latlonginfo
+                    print latlonginfo
                     return JsonResponse({'tweets' : latlonginfo})
                 except Exception as e:
                     print e

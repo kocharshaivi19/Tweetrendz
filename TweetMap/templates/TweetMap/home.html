@@ -136,6 +136,7 @@
                                     $.ajaxSettings.beforeSend(xhr, settings);
                     },
 					success: function(result) {
+					    alert(result);
 					    counter = 0;
 						console.log(counter);
 						tweetmsgs = result.tweets;
