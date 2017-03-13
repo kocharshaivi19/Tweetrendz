@@ -141,7 +141,7 @@
 			function eval() {
 				var val = document.getElementById('yr').value;
 				alert(val);
-				$('#loadingmessage').show(),
+				$('#loadingmessage').show();
 				$.ajax({
 					url : "/filter/",
 					method : "POST",
