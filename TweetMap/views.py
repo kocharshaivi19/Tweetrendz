@@ -109,7 +109,7 @@ def filter(request):
                         latlonginfo.append(info)
                         print (info)
                     print latlonginfo
-                    return JsonResponse({'tweets' : latlonginfo})
+                    return JsonResponse({'tweets': latlonginfo})
                 except Exception as e:
                     print e
                     return HttpResponse('Error')
